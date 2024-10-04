@@ -7,8 +7,7 @@ from botocore.exceptions import ClientError
 import requests
 import os
 
-# URL to access EC2 instance metadata and user data
-user_data_url = 'http://169.254.169.254/latest/user-data'
+# URL to access EC2 instance metadata
 meta_data_url = 'http://169.254.169.254/latest/meta-data'
 
 # File where EC2 instance data will be saved
@@ -17,7 +16,6 @@ ec2InsDatafile = 'ec2InsDatafile.txt'
 # Dictionary to map human-readable labels to EC2 metadata endpoints
 ec2_params = {
     'Instance ID': 'instance-id',
-    'Reservation ID': 'reservation-id',
     'Public IP': 'public-ipv4',
     'Private IP': 'local-ipv4',
     'Security Groups': 'security-groups'
@@ -50,10 +48,10 @@ try:
 
 # Catch and handle request errors
 except requests.RequestException as e:
-    print(f"Failed to retrieve {param} from EC2 metadata: {str(e)}")
+    print(f"Failed to retrieve EC2 metadata: {str(e)}")
 
-# Upload the metadata file to S3
-s3_bucket_name = 'new-bucket-e05ab0e0'  # Specify the S3 bucket name
+# Upload the metadata file to the specified S3 bucket
+s3_bucket_name = 'applicant-task/r5d4'  # Updated to the correct bucket name
 s3 = boto3.client('s3')  # Initialize the S3 client
 
 # Try to upload the metadata file to the specified S3 bucket
