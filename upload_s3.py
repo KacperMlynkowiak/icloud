@@ -1,3 +1,4 @@
+# This script collects EC2 instance metadata and uploads it to an S3 bucket
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -40,7 +41,7 @@ try:
         fh.write(f"Loginable Users: {users}\n")
 
 except IOError as e:
-    print(f"Error opening file for writing: {str(e)}")
+    print(f"Failed to retrieve {param} from EC2 metadata: {str(e)}")
 
 # Upload file to S3 storage
 s3_bucket_name = 'new-bucket-e05ab0e0'
