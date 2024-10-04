@@ -40,7 +40,7 @@ try:
         fh.write(f"OS VERSION: {os_version}\n")
         fh.write(f"Loginable Users: {users}\n")
 
-except IOError as e:
+except requests.RequestException as e:
     print(f"Failed to retrieve {param} from EC2 metadata: {str(e)}")
 
 # Upload file to S3 storage
